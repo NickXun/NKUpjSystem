@@ -59,6 +59,40 @@ body{
 	padding: 30px 0;
 	background: #efefef;
 }
+hr{
+	color: #43ce80;
+	opacity: 1;
+	margin-top: -10px;
+	margin-left: -40px;
+	margin-right: 10px;
+}
+.logo{
+	background: url(__PUBLIC__/images/nku_logo2.png) no-repeat;
+	-webkit-background-size: 60px 60px;
+	background-size: 60px 60px;
+	width: 80%;
+	height: 60px;
+	padding-left:45px; 
+	margin-left: 10px;
+}
+.nk_zh{
+	font-size: 24px;
+	letter-spacing: 0.6em;
+	font-weight: bolder;
+	color: #7B116B;
+	text-align: center;
+}
+.nk_en{
+	font-size: 18px;
+	color: #7B116B;
+	margin-top: -10px;
+}
+.notic_word{
+	text-align: center;
+	font-size: 14px;
+	margin:5px;
+	color: #888;
+}
 </style>
 <title>参与抽奖</title>
 </head>
@@ -66,13 +100,24 @@ body{
 <body>
   <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>参与抽奖</header>
   <div class="item_wrap">
-  	<div style="margin:15%; font-weight:bold; font-size:1.3em; margin-bottom:8%">个人资料填写</div>
+  	<div class="logo">
+		<p class="nk_zh">南开大学</p>
+		<p class="nk_en">NANKAI UNIVERSITY</p>
+		<hr>
+
+	</div>
+	<br>
+  	<p class="notic_word">感谢您对母校发展的支持，</p>
+  	<p class="notic_word">欢迎留下您的联系方式,</p>
+  	<p class="notic_word">以便母校与您长期保持情感沟通。</p>
+  	<br>
 	  <div><!--这个表单中如果各个标签的长度不同，需用&nbsp即空格调整，使得输入框对齐，两个&nbsp;是一个汉字的长度,每一个输入框的id与label里的for相同，使得点击label就能focus 对应得input框 -->
 	  <!-- 姓名和学号在登陆的时候已经得到了，保存下来，再看看还有什么有用信息吗 -->
-	    <div class="input-block"><label for="input-1">职业</label><input id="input-1" name='career' style="width:50%; margin-left:2%"></div>
-	    <div class="input-block"><label for="input-4">手机</label><input id="input-4" name='phone' style="width:50%; margin-left:2%"></div>
-	    <div class="input-block"><label for="input-5">邮箱</label><input id="input-5" name='email' style="width:50%; margin-left:2%"></div>
-	    <button class="btn" id="submit" style="outline:none;">提&nbsp;&nbsp;&nbsp;交</button>
+	    <div class="input-block"><label for="input-1">所在行业</label><input id="input-1" style="width:50%; margin-left:2%"></div>
+	    <div class="input-block"<label for="input-4">从事职业</label><input id="input-4" style="width:50%; margin-left:2%"></div>
+	    <div class="input-block"<label for="input-5">联系方式</label><input id="input-5" style="width:50%; margin-left:2%"></div>
+	    <div class="input-block"<label for="input-6">电子邮箱</label><input id="input-6" style="width:50%; margin-left:2%"></div>
+	    <button class="btn"  style="outline:none;">提&nbsp;&nbsp;&nbsp;交</button>
 	  </div>
   </div>
   

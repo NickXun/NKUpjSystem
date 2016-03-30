@@ -55,13 +55,42 @@ textarea{
 	-webkit-box-sizing:border-box;
 	width: 80%;
 	margin: 20px auto;
-	padding: 30px 0;
+	padding: 10px 0;
 	background: #efefef;
 }
 hr{
 	color: #43ce80;
-	opacity: 0.8;
-	margin-top: -5px;
+	opacity: 1;
+	margin-top: -10px;
+	margin-left: -40px;
+	margin-right: 10px;
+}
+.logo{
+	background: url(__PUBLIC__/images/nku_logo2.png) no-repeat;
+	-webkit-background-size: 60px 60px;
+	background-size: 60px 60px;
+	width: 80%;
+	height: 60px;
+	padding-left:45px; 
+	margin-left: 10px;
+}
+.nk_zh{
+	font-size: 24px;
+	letter-spacing: 0.6em;
+	font-weight: bolder;
+	color: #7B116B;
+	text-align: center;
+}
+.nk_en{
+	font-size: 18px;
+	color: #7B116B;
+	margin-top: -10px;
+}
+.notic_word{
+	text-align: center;
+	font-size: 14px;
+	margin:5px;
+	color: #888;
 }
 </style>
 </head>
@@ -70,9 +99,22 @@ hr{
   <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>意见反馈</header>
   <div class="item_wrap">
   	<div style="margin:5%">
-  	<p>有什么想说的都可以告诉我们哦~</p>
-  	<hr>
-    <textarea rows="8" cols="32" name="info"></textarea></div>
+  		<div class="logo">
+  			<p class="nk_zh">南开大学</p>
+  			<p class="nk_en">NANKAI UNIVERSITY</p>
+  			<hr>
+
+  		</div>
+  		<br>
+	  	<p class="notic_word">巍巍南开精神，</p>
+	  	<p class="notic_word">发煌前途无垠。</p>
+	  	<p class="notic_word">感谢一路有你，</p>
+	  	<p class="notic_word">愿日子繁花似锦，</p>
+	  	<p class="notic_word">再相逢依然如故。</p>
+	  	<p class="notic_word">沧笙踏歌携手共进步。</p>
+	  	<br>
+    <textarea rows="8" cols="30" name="info"></textarea>
+    </div>
 	  <button class="btn" style="outline:none;" id="submit">提&nbsp;&nbsp;交</button>
 	  <button onclick="lottery();" class="btn" style="outline:none;">参与抽奖</button>
   </div>

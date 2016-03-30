@@ -15,8 +15,8 @@ var loadingAnim={
 		var containerNode=document.createElement("div");
 		containerNode.classList.add("loading_container");
 		containerNode.style.zIndex=this.zIndex;
-		containerNode.style.height="100%";
-		containerNode.style.width="100%";
+		containerNode.style.height=document.body.scrollHeight+'px';
+		containerNode.style.width=document.body.scrollWidth+'px';
 		containerNode.style.backgroundColor=this.bgColor;
 		var spinnerNode=document.createElement("div");
 		spinnerNode.classList.add("spinner");
