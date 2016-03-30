@@ -231,7 +231,26 @@ function rat(star,result,m){
     }
   });*/
 }
+/**
+ * [isphone 判断平台]
+ * @param test: 1:iPhone    0:Android
+ */
+ function isIphone(){
+  var u = navigator.userAgent, app = navigator.appVersion;
+  try{
+    if(/iPhone|mac|iPod|iPad/i.test(navigator.userAgent)){
+      return 1;
+    }else{
+      return 0;
+    }
+  }catch(e){
+
+  }
+ };
+
+
 var NUM=5;
+var widthFactor=isIphone()?0.035:0.02;
 window.onload=function(){
   for(var j=1;j<=NUM;j++){
     //调用星星函数，1代表星星的分值
@@ -240,7 +259,7 @@ window.onload=function(){
     //跳过空白和最后隐藏的input
     for (var i = parentObj.childNodes.length - 2; i >= 0; i-=2) {
       //设置星星的大小
-      parentObj.childNodes[i].width=screen.width*0.015;    
+      parentObj.childNodes[i].width=screen.width*widthFactor;    
     };
   } 
 }
