@@ -113,11 +113,11 @@ hr{
   	<br>
 	  <div><!--这个表单中如果各个标签的长度不同，需用&nbsp即空格调整，使得输入框对齐，两个&nbsp;是一个汉字的长度,每一个输入框的id与label里的for相同，使得点击label就能focus 对应得input框 -->
 	  <!-- 姓名和学号在登陆的时候已经得到了，保存下来，再看看还有什么有用信息吗 -->
-	    <div class="input-block"><label for="input-1">所在行业</label><input id="input-1" style="width:50%; margin-left:2%"></div>
-	    <div class="input-block"<label for="input-4">从事职业</label><input id="input-4" style="width:50%; margin-left:2%"></div>
-	    <div class="input-block"<label for="input-5">联系方式</label><input id="input-5" style="width:50%; margin-left:2%"></div>
-	    <div class="input-block"<label for="input-6">电子邮箱</label><input id="input-6" style="width:50%; margin-left:2%"></div>
-	    <button class="btn"  style="outline:none;">提&nbsp;&nbsp;&nbsp;交</button>
+	    <div class="input-block"><label for="input-1">所在行业</label><input id="input-1" name="hangye" style="width:50%; margin-left:2%" required></div>
+	    <div class="input-block"><label for="input-4">从事职业</label><input id="input-4" name="career" style="width:50%; margin-left:2%" required></div>
+	    <div class="input-block"><label for="input-5">联系方式</label><input id="input-5" name="phone" style="width:50%; margin-left:2%" required></div>
+	    <div class="input-block"><label for="input-6">电子邮箱</label><input type="email" id="input-6" name="email" style="width:50%; margin-left:2%" required></div>
+	    <button class="btn" id="submit" style="outline:none;">提&nbsp;&nbsp;&nbsp;交</button>
 	  </div>
   </div>
   
@@ -131,14 +131,16 @@ hr{
 		var career = $("input[name='career']").val();
 		var phone = $("input[name='phone']").val();
 		var email = $("input[name='email']").val();
-		if (career && phone && email) {
+		var hangye = $("input[name='hangye']").val();
+		if (career && phone && email && hangye) {
 			$.post(
 				"{:U('Common/addlottery')}"
 				, 
 				{
 					career : career,
 					phone : phone,
-					email : email
+					email : email,
+					hangye : hangye
 				}
 				, 
 				function(data){

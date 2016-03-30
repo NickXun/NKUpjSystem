@@ -148,6 +148,7 @@ class CommonController extends Controller {
         $data['career'] = I('career');
         $data['telephone'] = I('phone');
         $data['email'] = I('email');
+        $data['hangye'] = I('hangye');
         $data['time'] = time();
 
         
