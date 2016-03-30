@@ -1,0 +1,112 @@
+<?php
+//require_once "jssdk.php";
+//$jssdk = new JSSDK("wx129325db79888ee1", "9e21fbec9c5fe8926a4f3ce0c4634529");
+//$signPackage = $jssdk->GetSignPackage();
+//$access_token=$jssdk->getAccessToken();
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+<style>
+header{
+	padding:4%;
+	text-align:center;
+	font-size:1.2em;
+	font-weight:500;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+#arrow{
+  background: url(__PUBLIC__/images/icon_back.png) 0 0 no-repeat;
+  background-size: contain;
+  height: 80%;
+  width: 6%;
+  margin-left: 10px;
+  float: left;
+  display: inline-block;
+}
+body{
+	margin:0px;
+	font: "等线" normal 100%;
+	letter-spacing:1px;
+	text-align:center;	
+}
+.btn-1{
+	border-color:#43ce80;
+	color:#FFFFFF;
+	background-color:#43ce80;
+	border-radius:20px;
+	padding-left:2em;
+	padding-right:1em;
+}
+.btn-2{
+	border-color:#43ce80;
+	color:#43ce80;
+	border-radius:20px;
+	padding-right:2em;
+	padding-left:1em;
+}
+.list-group{
+	text-align:left;
+	color:#232323;
+	font-size:1.2em;
+	font-weight:500;
+}
+.list-group-item{
+	padding-left:15%;
+}
+.number{
+	background-image:url(__PUBLIC__/images/num_bg.png);
+	background-size:100%;
+	background-repeat:no-repeat;
+	background-position:center;
+	padding:5px;
+	margin-right:2%;
+	color:#FFF;
+}
+
+</style>
+<title>最热老师</title>
+</head>
+
+<body>
+  <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>最热老师</header>
+  <div class="btn-group" style="margin:10%">
+  <button id="btn1" onclick="clickBtn1();" type="button" class="btn btn-default btn-1" style="outline:none;">全&nbsp;&nbsp;&nbsp;校</button>
+  <button id="btn2" onclick="clickBtn2();" type="button" class="btn btn-default btn-2" style="outline:none;">全&nbsp;&nbsp;&nbsp;院</button>
+  </div>
+  <ul class="list-group" id="school"><!--列表序号在每行的span里，这里先直接写8个，以后就从数据库里导入或者用js写个循环看着办 有的课程名可能长，请自行根据字的最大数目在list-group-item样式中调整padding -->
+  	<volist name="schoolteacher" id="vo">
+    	<li class="list-group-item"><span class="number">{$autoi1++}</span>&nbsp;{$vo.teacher_name}&nbsp;</li>
+    </volist>
+  </ul>
+
+  <ul class="list-group" id="department" style="display: none"><!--列表序号在每行的span里，这里先直接写8个，以后就从数据库里导入或者用js写个循环看着办 有的课程名可能长，请自行根据字的最大数目在list-group-item样式中调整padding -->
+  	<volist name="departmentteacher" id="vo">
+    	<li class="list-group-item"><span class="number">{$autoi2++}</span>&nbsp;{$vo.teacher_name}&nbsp;</li>
+    </volist>
+  </ul>
+    <!-- <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li>
+    <li class="list-group-item"><span class="number">1</span>&nbsp;教师姓名&nbsp;（课程名称）</li></ul> -->
+</body>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+<script type="text/javascript">
+//分享的标题、链接、图片链接
+var title="南开大学xx院十大热门老师";
+var desc="全世界校友评选，2016年南开大学xx院十大热门老师新鲜出炉";
+var link=window.location.href;
+var imgUrl="http://a3.att.hudong.com/83/41/01200000131071136554417140334.jpg";
+</script>
+<?php //include_once "wxshare.php" ?>
+</html>

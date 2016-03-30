@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>各院参与率</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/progressbar.css">
+	<style>
+		header{
+			padding:4%;
+			text-align:center;
+			font-size:1.2em;
+			font-weight:500;
+			background-color:#43ce80;
+			letter-spacing:1px;
+			color:rgba(255,255,255,1.00);
+		}
+		#arrow{
+			background: url(__PUBLIC__/images/icon_back.png) 0 0 no-repeat;
+			background-size: contain;
+			height: 80%;
+			width: 6%;
+			margin-left: 10px;
+			float: left;
+			display: inline-block;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		body{
+			background: url(__PUBLIC__/images/bg_2.png) repeat-y;
+			background-size: contain;
+			margin:0px;
+			font: "等线" normal 100%;
+			letter-spacing:1px;
+			text-align:left;
+			color:#4A4A4A;
+
+		}
+		.college_info{
+			display: block;
+			width: 100%;
+		}
+		.college_name{
+			display: inline-block;
+			width: 70%;
+		}
+		.college_rate{
+			position: absolute;
+			display: inline-block;
+			width: 30%;
+		}
+
+	</style>
+</head>
+
+<body>
+	<header>
+		<span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>
+		各院参与率
+	</header>
+	<section class="progress_list" style="margin: 10px;">
+		<!-- <div class="progress_container">
+			<div class="college_info">
+				<div class="college_name">
+					1231
+				</div>
+				<div class="college_rate">
+					132312
+				</div>
+			</div>
+			<div class="progress">
+				<div data-rate="50%" class="progress-bar progress-bar-info progress-bar-striped active"></div>
+			</div>
+		</div> -->
+		<volist name="process" id="vo">
+		<div class="progress_container">
+			<div class="college_info">
+				<div class="college_name">
+					{$vo.department_name}
+				</div>
+				<div class="college_rate">
+					{$vo.enum}/{$vo.num}
+				</div>
+			</div>
+			<div class="progress">
+				<div data-rate="{$vo.percent}" class="progress-bar progress-bar-info progress-bar-striped active"></div>
+			</div>
+		</div>
+		</volist>
+	</section>
+</body>
+<script type="text/javascript">
+var objArr=document.getElementsByClassName("progress-bar");
+for (var i = objArr.length - 1; i >= 0; i--) {
+	objArr[i].style.width=objArr[i].dataset.rate;
+};
+
+	
+</script>
+
+
+</html>

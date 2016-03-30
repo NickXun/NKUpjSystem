@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<title>启程南开</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.page{
+			width: 100%;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-clip: border-box;
+			background-position: center;
+			background-size: cover;
+			position: absolute;
+			left: 0;
+		}
+		#page_1{
+			background-image: url(__PUBLIC__/images/page_1.png);
+			top: 0;
+		}
+		#page_2{
+			background-image: url(__PUBLIC__/images/page_2.png);
+			top: 100%;
+			display: none;
+		}
+		#page_3{
+			background-image: url(__PUBLIC__/images/page_3.png);
+			top: 200%;
+			display: none;
+		}
+		.arrow{
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			position: absolute;
+			width: 100%;
+			height: 20px;
+			left: 0;
+			top: 95%;
+			z-index: 1;
+			animation: slideArrow 1s ease infinite;
+			-moz-animation: slideArrow 1s ease infinite;	/* Firefox */
+			-webkit-animation: slideArrow 1s ease infinite;	/* Safari 和 Chrome */
+			-o-animation: slideArrow 1s ease infinite;
+		}
+		#arrow_1{
+			background-image: url(__PUBLIC__/images/arrow_1.png);
+		}
+		#arrow_2{
+			background-image: url(__PUBLIC__/images/arrow_2.png);
+		}
+		@keyframes slideArrow
+		{
+		0% {top: 95%;}
+		70% {top: 93%;}
+		100% {top: 95%;}
+		}
+
+		@-moz-keyframes slideArrow /* Firefox */
+		{
+		0% {top: 95%;}
+		70% {top: 93%;}
+		100% {top: 95%;}
+		}
+
+		@-webkit-keyframes slideArrow /* Safari 和 Chrome */
+		{
+		0% {top: 95%;}
+		70% {top: 93%;}
+		100% {top: 95%;}
+		}
+
+		@-o-keyframes slideArrow /* Opera */
+		{
+		0% {top: 95%;}
+		70% {top: 93%;}
+		100% {top: 95%;}
+		}
+		.button{
+			background-image: url(__PUBLIC__/images/button.png);
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			position: absolute;
+			width: 100%;
+			height: 35px;
+			left: 0;
+			top: 92%;
+			z-index: 1;
+		}
+		.button:active{
+			/*position: relative;
+			left: 1px;
+			top: 1px;*/
+			 transform:translate(1px,1px);
+			 -webkit-transform:-webkit-translate(1px,1px);
+			 -o-transform:-o-translate(1px,1px);
+			 -moz-transform:-moz-translate(1px,1px);
+		}
+	</style>
+
+</head>
+<body>
+	<div id="page_1" class="page">
+		<span id="arrow_1" class="arrow" ontouchstart="down()">
+		
+		</span>
+	</div>
+	<div id="page_2" class="page">
+		<span id="arrow_2" class="arrow" ontouchstart="down()">
+		
+		</span>
+	</div>
+	<div id="page_3" class="page">
+		<span class="button" ontouchstart="goin()">
+		
+		</span>
+	</div>
+</body>
+<script type="text/javascript">
+	var obj=document.getElementsByTagName("body")[0];
+	var pages=document.getElementsByClassName("page");
+	var curPageNum=0;
+	var startX,startY,endX,endY;
+	var speed=2;
+	var curTop=0;
+	var pageNum=3
+	var isRunning=false;
+	window.addEventListener("touchstart",function(event){
+		// 如果这个元素的位置内只有一个手指的话 
+		if (event.changedTouches.length == 1) { 
+		console.log("touchstart");
+			var touch = event.changedTouches[0]; 
+			// 把元素放在手指所在的位置 
+			startX = touch.pageX; 
+			startY = touch.pageY; 
+		} 
+		event.preventDefault();
+	},false);
+	window.addEventListener("touchend",function(event){
+		// 如果这个元素的位置内只有一个手指的话 
+		// if (event.changedTouches.length == 1) { 
+		console.log("touchend");
+		// alert(1);
+			var touch = event.changedTouches[0]; 
+			// 把元素放在手指所在的位置 
+			endX = touch.pageX; 
+			endY = touch.pageY; 
+			// alert(2);
+			if (startY-endY>40&&curPageNum<pageNum-1&&!isRunning) {
+				down();
+			};
+
+			if (startY-endY<-40&&curPageNum>0&&!isRunning) {
+				var t=setInterval(function(){
+					isRunning=true;
+					curTop=curTop+speed;
+					pages[(curPageNum-1)%pageNum].style.display="block";
+					pages[curPageNum].style.top=curTop+'%';
+					pages[(curPageNum-1)%pageNum].style.top=-100+curTop+'%';
+					if (curTop>=100) {
+						clearInterval(t);
+						pages[curPageNum].style.display="none";
+						curTop=0;
+						curPageNum=(--curPageNum)%pageNum;
+						isRunning=false;
+					};
+				},8)
+			};
+		// } 
+		console.log(curPageNum)
+		event.preventDefault();
+	},false);
+	function down(){
+		var t=setInterval(function(){
+			isRunning=true;
+			curTop=curTop-speed;
+			pages[(curPageNum+1)%pageNum].style.display="block";
+			pages[curPageNum].style.top=curTop+'%';
+			pages[(curPageNum+1)%pageNum].style.top=100+curTop+'%';
+			if (curTop<=-100) {
+				clearInterval(t);
+				pages[curPageNum].style.display="none";
+				curTop=0;
+				curPageNum=(++curPageNum)%pageNum;
+				isRunning=false;
+			};
+		},8)
+	}
+
+	function goin() {
+		window.location.href = "{:U('Index/index')}";
+	}
+</script>
+</html>

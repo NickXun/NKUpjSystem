@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<title>主页</title>
+</head>
+<style>
+a:hover {text-decoration: none;}
+header{
+	padding:4%;
+	text-align:center;
+	font-size:1.2em;
+	font-weight:300;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+html,body{
+			width: 100%;
+			height: 100%;
+		}
+body{
+	background: url(__PUBLIC__/images/bg.png) repeat-y;
+	background-size: contain;
+	margin:0px;
+	font: "等线" normal 100%;
+	color:#4F4F4F;
+	letter-spacing:1px;
+	background-color:rgb(238,238,238);
+	
+}
+.fav_choice{
+	padding:3%;
+	padding-left:10%;
+	border-bottom:solid thin rgba(179,179,179,1.00);
+	padding:5%;
+	text-align:center;
+}
+.Grey{
+	padding:2px;
+	padding-left:5px;
+	padding-right:5px;
+	background-color:rgb(229,229,229);
+	font-size:0.8em;
+	color:rgba(108,108,108,1.00);
+}
+.table{
+	background-color:#FFF;
+}
+.media{
+	padding:5%;
+	background-color:#FFF;
+	border-bottom:solid thin rgba(184,184,184,1.00);
+}
+.media-heading{
+	font-size:1.1em;
+}
+
+.btn_click{
+	width:60%;
+	padding:3%;
+	font-size:1.1em;
+	font-weight:200;
+	color:#FFF;
+	letter-spacing:5px;
+	border:none;
+	background-color:#43ce80;
+}
+.btn_click:active{
+	background-color:#901A95;
+}
+</style>
+<body>
+
+  <header>课程评价系统</header>
+  <div class="media" style="margin-top:0px">
+    <img class="pull-left media-object" src="__PUBLIC__/images/icon_class.png" width="20%" style="margin-left:5%; margin-right:5%; vertical-align:middle">
+    <div class="media-body">
+    <a href="{:U('Main/class')}">
+	    <span class="media-heading">你还记得二主楼里上过的课吗？</span><br>
+	    <span class="Grey">共有{$courseamount}门课程等待你添加印象标签</span>
+	</a>
+    </div>
+  </div>
+  <if condition="$modules['teacher'] eq 1 ">
+  <div class="media" style="margin-top:3%">
+    <img class="pull-left media-object" src="__PUBLIC__/images/icon_teacher.png" width="20%" style="margin-left:5%; margin-right:5%">
+    <div class="media-body">
+    <a href="{:U('Main/teacher')}">
+	    <span class="media-heading">你还记得教你解题的老师吗？</span><br>
+	    <span class="Grey">共有{$teacheramount}位老师等待你添加印象标签</span>
+	</a>
+    </div>
+  </div>
+  </if>
+  <div style="text-align:center; margin:5%">
+  <!-- <a href="{:U('Main/advise')}" class="btn_click">建议和留言</a> -->
+  <a href="{:U('Index/share')}?id={$student_code}" class="btn_click">分享朋友圈</a>
+  </div>
+  <table class="table" style="border-width:thin">
+  	
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotclass')}">❤&nbsp;&nbsp;查看课程人气排行榜</a></td></tr></tbody>
+	<if condition="$modules['teacher'] eq 1 ">
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotteacher')}">❤&nbsp;&nbsp;查看老师人气排行榜</a></td></tr></tbody>
+    </if>
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotcomment')}">❤&nbsp;&nbsp;查看热门评论</a></td></tr></tbody>
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/participate')}">❤&nbsp;&nbsp;查看各院参与率</a></td></tr></tbody>
+   <!--  <tbody style="background-color:#E5E5E5"><tr><td style="padding-left:5%">❤&nbsp;&nbsp;意见反馈</td></tr></tbody> -->
+   </table>
+</body>
+</html>

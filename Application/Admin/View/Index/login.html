@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>南开大学评教系统后台 | Login</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<include file="Index/cssheader" />
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link href="__PUBLIC__/media/css/login-soft.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="__PUBLIC__/media/image/favicon.ico" />
+
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="login">
+
+	<!-- BEGIN LOGO -->
+
+	<div class="logo">
+
+		<h3 style="text-align: center;color: #fff">南开大学评教系统</h3> 
+
+	</div>
+
+	<!-- END LOGO -->
+
+	<!-- BEGIN LOGIN -->
+
+	<div class="content">
+
+		<!-- BEGIN LOGIN FORM -->
+
+		<div class="form-vertical login-form">
+
+			<h3 class="form-title">Login to your account</h3>
+
+			<div class="alert alert-error hide">
+
+				<button class="close" data-dismiss="alert"></button>
+
+				<span>Enter any username and password.</span>
+
+			</div>
+
+			<div class="control-group">
+
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+
+				<label class="control-label visible-ie8 visible-ie9">Username</label>
+
+				<div class="controls">
+
+					<div class="input-icon left">
+
+						<i class="icon-user"></i>
+
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="control-group">
+
+				<label class="control-label visible-ie8 visible-ie9">Password</label>
+
+				<div class="controls">
+
+					<div class="input-icon left">
+
+						<i class="icon-lock"></i>
+
+						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password"/>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="form-actions">
+
+				<label class="checkbox">
+
+				<input type="checkbox" name="remember" value="1"/> Remember me
+
+				</label>
+
+				<button type="button" id="login" class="btn blue pull-right">
+
+				Login <i class="m-icon-swapright m-icon-white"></i>
+
+				</button>            
+
+			</div>
+
+			
+
+		</div>
+
+		<!-- END LOGIN FORM -->        
+
+		
+
+	</div>
+
+	<!-- END LOGIN -->
+
+	<!-- BEGIN COPYRIGHT -->
+
+	<div class="copyright">
+
+		2013 &copy; inankai 工作室
+
+	</div>
+
+	<include file="Index/jsfooter" />
+
+	<script>
+
+		jQuery(document).ready(function() {     
+
+		  App.init();
+
+		  Login.init();
+
+		  $.backstretch([
+		        "__PUBLIC__/media/image/bg/1.jpg",
+		        "__PUBLIC__/media/image/bg/2.jpg",
+		        "__PUBLIC__/media/image/bg/3.jpg",
+		        "__PUBLIC__/media/image/bg/4.jpg"
+		        ], {
+		          fade: 1000,
+		          duration: 8000
+		      });
+
+		});
+
+		$("#login").click(function() {
+			var username = $("input[name='username']").val(),
+				password = $("input[name='password']").val();
+
+
+			$.post(
+			"{:U('Ajax/checklogin')}"
+			, 
+			{
+				username : username,
+				password : password
+			}
+			, 
+			function (data) {
+				if (data.result == "nodata") {
+					alert("用户名或密码错误");
+				} else if (data.result == "success") {
+					window.location.href = "{:U('Manage/index')}";
+				}
+			}
+			);
+		})
+
+	</script>
+
+	<!-- END JAVASCRIPTS -->
+
+</body>
+
+<!-- END BODY -->
+
+</html>

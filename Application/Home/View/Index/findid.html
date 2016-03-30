@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>找回学号</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+	background-color:#43ce80;
+	font-family:"等线" 100%;
+	text-align:center;
+	color:#FFF;
+}
+::-webkit-input-placeholder{
+	color:#FFFFFF;
+	font-size:1.2em;
+	font-weight:lighter;
+	padding:0px;
+	font-family:"等线";
+}
+header{
+	padding-top:45%;
+	padding-bottom:10%;
+	font-size:2em;
+	letter-spacing:0.3em;
+}
+input{
+	margin:2%;
+	border-left:none;
+	border-right:none;
+	border-top:none;
+	background-color:#43ce80;
+	border-bottom:#FFF solid thin;
+	width:66%;
+	height:2.5em;
+}
+button{
+	background-color:#43ce80;
+	border:#FFF thin solid;
+	padding:0.4em;
+	padding-left:1.6em;
+	padding-right:1.6em;
+	color:#FFF;
+	font-size:1.3em;
+	border-radius:3em;
+}
+</style>
+</head>
+<!-- 找到的学号就直接跳到登陆页面做默认值吧 -->
+<body>
+  <img onclick="history.go(-1);" src="__PUBLIC__/images/icon_back.png" width="5%" style="float:left; margin:2%">
+  <header>找回学号</header>
+  <div style="margin-bottom:12%">
+    <input type="text" required="required" placeholder="身份证后六位" style="outline:none;" name="cdcard"><br>
+    <input type="text" required="required" placeholder="姓 名" style="outline:none;" name="name">
+  </div>
+  <button style="outline:none;" id="submit">提&nbsp;&nbsp;&nbsp;交</button>
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.5.1.js"></script>
+<script type="text/javascript">
+	$("#submit").click(function() {
+		var cdcard = $("input[name='cdcard']").val();
+		var name = $("input[name='name']").val();
+
+		if (cdcard && name) {
+			$.post(
+				"{:U('Index/studentcode')}",
+				{
+					cdcard : cdcard,
+					name : name
+				},
+				function (data) {
+					if (data.status) {
+						alert("您的学号为："+data.student_code);
+						window.location.href = "{:U('Index/index')}" + "?studentcode=" + data.student_code + "&name="+name;
+					} else {
+						alert("身份证后六位与姓名不符");
+					}
+				}
+				);
+		} else {
+			alert("身份证后六位与姓名不符");
+		}
+	})
+</script>

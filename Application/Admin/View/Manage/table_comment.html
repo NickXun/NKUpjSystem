@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>南开大学评教系统后台</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<include file="Index/cssheader" />
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/media/css/select2_metro.css" />
+
+	<link rel="stylesheet" href="__PUBLIC__/media/css/DT_bootstrap.css" />
+	
+	<link href="__PUBLIC__/media/css/pagination.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="__PUBLIC__/media/image/favicon.ico" />
+
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed">
+
+	<!-- BEGIN HEADER -->
+
+	<include file="Manage/topbar" />
+
+	<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->
+
+	<div class="page-container row-fluid">
+
+		<!-- BEGIN SIDEBAR -->
+
+		<include file="Manage/siderbar" />
+
+		<!-- END SIDEBAR -->
+
+		<!-- BEGIN PAGE -->
+
+		<div class="page-content">
+
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<div id="portlet-config" class="modal hide">
+
+				<div class="modal-header">
+
+					<button data-dismiss="modal" class="close" type="button"></button>
+
+					<h3>portlet Settings</h3>
+
+				</div>
+
+				<div class="modal-body">
+
+					<p>Here will be a configuration form</p>
+
+				</div>
+
+			</div>
+
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<!-- BEGIN PAGE CONTAINER-->        
+
+			<div class="container-fluid">
+
+				<!-- BEGIN PAGE HEADER-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<!-- BEGIN STYLE CUSTOMIZER -->
+
+						<include file="Manage/themepannel" />
+
+						<!-- END BEGIN STYLE CUSTOMIZER -->  
+
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+						<h3 class="page-title">
+
+							评论及回复 <small>最新消息</small>
+
+						</h3>
+
+						<ul class="breadcrumb">
+
+							<li>
+
+								<i class="icon-home"></i>
+
+								<a href="index.html">Home</a> 
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li>
+
+								<a href="#">Data Tables</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li><a href="#">评论及回复</a></li>
+
+						</ul>
+
+						<!-- END PAGE TITLE & BREADCRUMB-->
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE HEADER-->
+
+				<!-- BEGIN PAGE CONTENT-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box green">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-globe"></i>用户留言</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="reload"></a>
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body">
+
+								<table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+
+									<thead>
+
+										<tr>
+
+											<th>序号</th>
+
+											<th>姓名</th>
+
+											<th class="hidden-480">学院</th>
+
+											<th class="hidden-480">内容</th>
+
+											<th class="hidden-480">时间</th>
+
+											<th class="hidden-480">审核</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<volist name="list" id="vo">
+										<tr id="{$vo.comment_id}">
+
+											<td>{$auto++}</td>
+
+											<td class="{$vo.comment_student_id}">{$vo.student_name}</td>
+
+											<td class="hidden-480 {$vo.department_code}">{$vo.department_name}</td>
+
+											<td class="hidden-480">{$vo.comment_info}</td>
+
+											<td class="hidden-480">{$vo.comment_time|date='Y-m-d H:m:s',###}</td>
+											<if condition="$vo.comment_ispass eq 0">
+											<td class="hidden-480 c-{$vo.comment_id}"><a href="javascript:checkout('{$vo.comment_id}');" class="btn mini purple"><i class="icon-edit"></i>审核</a></td>
+											<else/> <td><span class="label label-success">已通过审核</span></td>
+											</if>
+
+										</tr>
+										</volist>
+
+
+									</tbody>
+
+								</table>
+								<div class="pagination">{$page}</div>
+							</div>
+							
+
+						</div>
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT-->
+
+			</div>
+
+			<!-- END PAGE CONTAINER-->
+
+		</div>
+
+		<!-- END PAGE -->
+
+	</div>
+
+	<!-- END CONTAINER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<include file="Manage/footer" />
+
+	<!-- END FOOTER -->
+
+	<include file="Manage/jsfooter" />  
+	<script src="__PUBLIC__/media/js/table-advanced.js"></script>  
+	<script type="text/javascript" src="__PUBLIC__/media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/media/js/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/media/js/DT_bootstrap.js"></script> 
+
+	<script>
+
+		jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableAdvanced.init();
+
+		   $("#sample_1").next().remove();
+
+		});
+
+		function checkout(cid) {
+			var r = confirm("请确认是否通过审核");
+			if (r == true)
+			{
+				$.post(
+					"{:U('Ajax/checkoutcomment')}",
+					{
+						cid : cid
+					},
+					function (data) {
+						if(data.result == 1){
+							alert("审核成功");
+						}
+						$(".c-"+cid).after('<td><span class="label label-success">已通过审核</span></td>');
+						$(".c-"+cid).remove();
+					}
+					);
+			}
+			else
+			{
+				;
+			}
+		}
+
+	</script>
+
+</body>
+
+<!-- END BODY -->
+
+</html>

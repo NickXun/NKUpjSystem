@@ -1,0 +1,196 @@
+<?php
+//require_once "__PUBLIC__/jssdk.php";
+//$jssdk = new JSSDK("wx129325db79888ee1", "9e21fbec9c5fe8926a4f3ce0c4634529");
+//$signPackage = $jssdk->GetSignPackage();
+//$access_token=$jssdk->getAccessToken();
+?>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>最热评论</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+header{
+	padding:4%;
+	text-align:center;
+	font-size:1.2em;
+	font-weight:500;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+#arrow{
+  background: url(__PUBLIC__/images/icon_back.png) 0 0 no-repeat;
+  background-size: contain;
+  height: 80%;
+  width: 6%;
+  margin-left: 10px;
+  float: left;
+  display: inline-block;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+}
+body{
+  background: url(__PUBLIC__/images/bg_2.png) repeat-y;
+  background-size: contain;
+	margin:0px;
+	font: "等线" normal 100%;
+	letter-spacing:1px;
+	text-align:left;
+	color:#4A4A4A;
+}
+td{
+	color:rgba(36,36,36,1.00);
+	font-size:1em;
+	width:70%;
+}
+.side{
+	padding-right:5%; 
+	font-size:0.8em;
+}
+
+table{
+	border:thin  solid rgb(221,221,221);
+	border-collapse: inherit;
+	border-top:none;
+	border-right:none;
+	border-left:none;
+}
+.table>tbody>tr>td{
+	line-height:2em;
+	padding-left:1.5em;
+	}
+
+	.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+  @-webkit-keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+.add{
+  background: #ddd;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  display: block;
+  line-height: 50px;
+  
+}
+</style>
+</head>
+
+<body>
+  <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>最热评论</header>
+  <table class="table">
+    <tbody>
+      <volist name="comment" id="vo">
+      <tr><td>{$vo.comment_info}</td><td class="side"><img id="{$vo.comment_id}" onclick="like(this);" src="__PUBLIC__/images/icon_loveit_none.png" width="15%">&nbsp;&nbsp;<span>{$vo.comment_zan}</span>个赞</td></tr>
+      </volist>
+    </tbody>
+  </table>
+  <div id="container"></div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.5.1.js"></script>
+<script type="text/javascript">
+//点赞
+  var zan = localStorage.zan ? localStorage.zan : "";
+  console.log(zan);
+  if (zan) {
+    var zanarray = zan.split(",");
+    for(var i = 0; i < zanarray.length; i++) {
+      //console.log($("#"+zanarray[i]));
+      $("#"+zanarray[i])[0].src = "__PUBLIC__/images/icon_loveit_click.png";
+      
+    }
+  } else {
+    zanarray = [];
+  }
+	function like(o){
+		var divShow=document.createElement("div");   //点赞时的动画
+		var container=document.getElementById("container");
+    var comment_id = "";
+		divShow.style.position="absolute";
+	    divShow.style.top=document.body.clientHeight/2-25+'px'; 
+	    divShow.style.left=document.body.clientWidth/2-25+'px'; 
+		divShow.className="fadeOutDown animated add text-center";
+		var count=+o.nextSibling.nextSibling.innerHTML;
+		//通过图片名称来判断点赞状态
+		if(o.src.slice(-8,-4)=="none"){
+			o.src="__PUBLIC__/images/icon_loveit_click.png";
+			o.nextSibling.nextSibling.innerHTML=count+1;
+      //console.log($(o).parent().parent()[0].id);
+      comment_id = $(o)[0].id;
+       $.post(
+         "{:U('Common/addzan')}", 
+        {
+          comment_id : comment_id
+        }, 
+        function (data){
+            divShow.innerHTML="+1";
+        });
+        zanarray.push(comment_id);
+		}else{
+			o.src="__PUBLIC__/images/icon_loveit_none.png";
+			o.nextSibling.nextSibling.innerHTML=count-1;
+      comment_id = $(o)[0].id;
+      $.post(
+         "{:U('Common/subzan')}", 
+        {
+          comment_id : comment_id
+        }, 
+        function (data){
+            divShow.innerHTML="-1";
+        });
+			  zanarray.splice(zanarray.indexOf(comment_id),1);
+		}
+		//console.log(o.nextSibling.nextSibling.innerHTML);
+		container.appendChild(divShow);
+    //console.log(zanarray);
+    localStorage.zan = zanarray.join(",");
+	}
+
+</script>
+<script type="text/javascript">
+//分享的标题、链接、图片链接
+var title="南开大学教务处评课经典评论";
+var desc="全世界校友评选，2016年南开大学教务处评课经典评论新鲜出炉";
+var link=window.location.href;
+var imgUrl="http://a3.att.hudong.com/83/41/01200000131071136554417140334.jpg";
+</script>
+<?php //include_once "__PUBLIC__/wxshare.php" ?>
+</html>

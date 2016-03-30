@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/loading1.css">
+<style>
+header{
+	padding:4%;
+	text-align:center;
+	font: "等线";
+	font-size:1.2em;
+	font-weight:300;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+#arrow{
+  background: url(__PUBLIC__/images/icon_back.png) 0 0 no-repeat;
+  background-size: contain;
+  height: 80%;
+  width: 6%;
+  margin-left: 10px;
+  float: left;
+  display: inline-block;
+}
+body{
+	margin:0px;
+	font: "等线" normal 100%;
+	color:#292929;
+	letter-spacing:1px;
+	text-align:center;	
+}
+.input-block{
+	margin-top:5%;
+	margin-bottom:5%;
+}
+.btn{
+	background-color:#43ce80;
+	border-radius:20px;
+	color:#FFF;
+	padding:2%;
+	padding-left:5%;
+	padding-right:5%;
+	margin:5%;
+	border:none;
+	font:"等线";
+	font-size:0.9em;
+}
+.item_wrap{
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+	box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	width: 80%;
+	margin: 20px auto;
+	padding: 30px 0;
+	background: #efefef;
+}
+</style>
+<title>参与抽奖</title>
+</head>
+
+<body>
+  <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>参与抽奖</header>
+  <div class="item_wrap">
+  	<div style="margin:15%; font-weight:bold; font-size:1.3em; margin-bottom:8%">个人资料填写</div>
+	  <div><!--这个表单中如果各个标签的长度不同，需用&nbsp即空格调整，使得输入框对齐，两个&nbsp;是一个汉字的长度,每一个输入框的id与label里的for相同，使得点击label就能focus 对应得input框 -->
+	  <!-- 姓名和学号在登陆的时候已经得到了，保存下来，再看看还有什么有用信息吗 -->
+	    <div class="input-block"><label for="input-1">职业</label><input id="input-1" name='career' style="width:50%; margin-left:2%"></div>
+	    <div class="input-block"><label for="input-4">手机</label><input id="input-4" name='phone' style="width:50%; margin-left:2%"></div>
+	    <div class="input-block"><label for="input-5">邮箱</label><input id="input-5" name='email' style="width:50%; margin-left:2%"></div>
+	    <button class="btn" id="submit" style="outline:none;">提&nbsp;&nbsp;&nbsp;交</button>
+	  </div>
+  </div>
+  
+</body>
+</html>
+<script src="__PUBLIC__/js/jquery-1.5.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="__PUBLIC__/js/loading1.js"></script>
+<script type="text/javascript">
+	$("#submit").click(function(){
+		loadingAnim.show();
+		var career = $("input[name='career']").val();
+		var phone = $("input[name='phone']").val();
+		var email = $("input[name='email']").val();
+		if (career && phone && email) {
+			$.post(
+				"{:U('Common/addlottery')}"
+				, 
+				{
+					career : career,
+					phone : phone,
+					email : email
+				}
+				, 
+				function(data){
+					if(data.result == 1) {
+						alert("参与抽奖成功,获奖我们将通知您");
+						window.location.href = "{:U('Index/share')}?id={$student_code}";
+					} else if (data.result == 2){
+						alert("您已参加过抽奖");
+						window.location.href = "{:U('Main/main')}";
+					} else {
+						loadingAnim.hide();
+						alert("网络发生问题");
+					}
+				});
+		} else {
+
+			alert("请填写必填信息");
+			loadingAnim.hide();
+		}
+	})
+</script>

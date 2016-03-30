@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<title>主页</title>
+</head>
+<style>
+a:hover {text-decoration: none;}
+header{
+	padding:4%;
+	text-align:center;
+	font-size:1.2em;
+	font-weight:300;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+body{
+	margin:0px;
+	font: "等线" normal 100%;
+	color:#4F4F4F;
+	letter-spacing:1px;
+	background-color:rgb(238,238,238);
+	
+}
+.fav_choice{
+	padding:3%;
+	padding-left:10%;
+	border-bottom:solid thin rgba(179,179,179,1.00);
+	padding:5%;
+	text-align:center;
+}
+.Grey{
+	padding:2px;
+	padding-left:5px;
+	padding-right:5px;
+	background-color:rgb(229,229,229);
+	font-size:0.8em;
+	color:rgba(108,108,108,1.00);
+}
+.table{
+	background-color:#FFF;
+}
+.media{
+	padding:5%;
+	background-color:#FFF;
+	border-bottom:solid thin rgba(184,184,184,1.00);
+}
+.media-heading{
+	font-size:1.1em;
+}
+</style>
+<body>
+  <header>课程评价系统</header>
+  
+  <div class="media" style="margin-top:3%">
+    <img class="pull-left media-object" src="__PUBLIC__/images/icon_teacher.png" width="20%" style="margin-left:5%; margin-right:5%">
+    <div class="media-body">
+    <a>
+	    <!-- <span class="media-heading">评选你最喜欢的老师</span><br> -->
+	    <div class="Grey">本系统为毕业校友评教系统，旨在更好的指导课程方向。您还未毕业，暂时不能评教。您可以查看全校和全院热门排行榜，也可以给学校留言，感谢您的支持！</div>
+	</a>
+    </div>
+  </div>
+  <div style="text-align:center; margin:5%">
+  <a href="{:U('Common/advise')}" style="width:60%; padding:3%; font-size:1.1em; font-weight:200; color:#FFF; letter-spacing:5px; border:none; background-color:#43ce80">建议和留言</a>
+  </div>
+  <table class="table" style="border-width:thin">
+  	
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotclass')}">❤&nbsp;&nbsp;查看课程人气排行榜</a></td></tr></tbody>
+	<if condition="$modules['teacher'] eq 1 ">
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotteacher')}">❤&nbsp;&nbsp;查看老师人气排行榜</a></td></tr></tbody>
+    </if>
+    <tbody><tr><td style="padding-left:5%"><a href="{:U('Common/hotcomment')}">❤&nbsp;&nbsp;查看热门评论</a></td></tr></tbody>
+   <!--  <tbody style="background-color:#E5E5E5"><tr><td style="padding-left:5%">❤&nbsp;&nbsp;意见反馈</td></tr></tbody></table> -->
+</body>
+</html>

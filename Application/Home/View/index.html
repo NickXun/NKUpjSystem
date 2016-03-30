@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.inputblock{
+	background-color:transparent;
+	border:0px;
+	color: #FFFFFF;
+	font-size:1em;
+	width:60%;
+	height:36px;
+	font-family:"等线";
+	font-weight:200;
+}
+.inputcolumn{
+	border-bottom:#FFFFFF solid thin;
+	font-color: #FFFFFF;
+	margin:8% auto;
+	padding:0px;
+	font-weight:200;
+	font-size:24px;
+}
+.titles{
+	letter-spacing: 5px;
+	font-size: 0.9em;
+	color: #FFFFFF;
+	padding-right: 5px;
+	padding-left: 1px;
+	font-family: "等线";
+}
+::-webkit-input-placeholder{
+	color:#FFFFFF;
+	font-size:0.65em;
+	font-weight:lighter;
+	padding:0px;
+	font-family:"等线";
+	opacity:0.5;
+}
+#submit{
+	font-size:1.5em;
+	color:#FFFFFF;
+	background-color:#43ce80;
+	border:thin #FFFFFF solid;
+	width:80%;
+	padding-top:2%;
+	padding-bottom:2%;
+	border-radius:20px;
+	font-family:"等线";
+	margin-top:10%;
+}
+#forgot{
+	position: absolute; 
+	height: 20px;
+	margin-top: 5px;
+
+}
+</style>
+<title>校友登录</title>
+</head>
+<body style="background-color:#43ce80; text-align:center; margin:10%; font-family:'等线'; font:normal 100%">
+  <div style=" margin:10%; margin-top:20%"><img src="{$Think.const.JSURL}/nku_logo.png" width="60%" >
+  </div>
+  <div class="inputcolumn">
+    <span class="titles">学号</span>
+	<input required class="inputblock" type="text" placeholder="输入你在南开大学的学号"><img id="forgot" onclick="window.location='findid.html'" src="img/icon_forgot.png">
+	</div>
+  <div class="inputcolumn">
+    <!--<a style="float:right" href=""><img src="icon_forgot.png" width="50%"></a>问号-->
+    <span class="titles">姓名</span>
+    <input required class="inputblock" type="text" placeholder="输入你的姓名">
+</div>
+  <div id="login_submit"><a href="main.html"><button id="submit"  style="outline:none;">评&nbsp;&nbsp;&nbsp;课</button></a></div>
+</body>
+</html>

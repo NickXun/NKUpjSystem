@@ -1,0 +1,128 @@
+<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner">
+
+			<div class="container-fluid">
+
+				<!-- BEGIN LOGO -->
+
+				<a class="brand" href="index.html">
+
+				<!-- logo<img src="media/image/logo.png" alt="logo"/> -->
+				<span style="margin-left:20px;">南开大学评教系统后台</span>
+				</a>
+
+				<!-- END LOGO -->
+
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+				<img src="media/image/menu-toggler.png" alt="" />
+
+				</a>          
+
+				<!-- END RESPONSIVE MENU TOGGLER -->            
+
+				<!-- BEGIN TOP NAVIGATION MENU -->              
+
+				<ul class="nav pull-right">
+
+
+					<!-- BEGIN INBOX DROPDOWN -->
+
+					<li class="dropdown" id="header_inbox_bar">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+						<i class="icon-envelope"></i>
+						
+						<!-- 没有新消息就不显示这个span -->
+						<span id="message_num" class="badge">5</span>
+
+						</a>
+
+						<ul class="dropdown-menu extended inbox">
+							<!-- 没有新消息就不显示这个li -->
+							<li>
+
+								<p>有5条新评论</p>
+
+							</li>
+
+							
+
+							<li  id="message_clear">
+
+								<a href="javascript:;">
+
+								<span class="message">
+
+								清空
+
+								</span>  
+
+								</a>
+
+							</li>
+
+							<li class="external">
+
+								<a href="table_comment.php">查看 <i class="m-icon-swapright"></i></a>
+
+							</li>
+
+						</ul>
+
+					</li>
+
+					<!-- END INBOX DROPDOWN -->
+
+
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+
+					<li class="dropdown user">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+						<span class="username">{$admin_name}</span>
+
+						<i class="icon-angle-down"></i>
+
+						</a>
+
+						<ul class="dropdown-menu">
+
+
+							<li><a href="lock.php"><i class="icon-lock"></i> Lock Screen</a></li>
+
+							<li><a href="{:U('Index/logout')}"><i class="icon-key"></i> Log Out</a></li>
+
+						</ul>
+
+					</li>
+
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+
+				<!-- END TOP NAVIGATION MENU --> 
+
+			</div>
+
+		</div>
+
+		<!-- END TOP NAVIGATION BAR -->
+
+	</div>
+
+	<!-- END HEADER -->
+	<div class="copyrights">designed by <a href="http://inankai.cn/" >inankai工作室</a></div>
+	<script type="text/javascript">
+	
+	
+	</script>

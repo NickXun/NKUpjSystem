@@ -1,0 +1,152 @@
+<!-- BEGIN SIDEBAR -->
+
+		<div class="page-sidebar nav-collapse collapse">
+
+			<!-- BEGIN SIDEBAR MENU -->        
+
+			<ul class="page-sidebar-menu">
+
+				<li>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+					<div class="sidebar-toggler hidden-phone"></div>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<br/>
+
+				</li>
+
+				
+				<!--注意，li的id和页面的名字要一致，因为是通过url中页面名称来给li加active类的 -->
+				<li id="table_index" class="start ">
+
+					<a href="{:U('Manage/table_index')}">
+
+					<i class="icon-home"></i> 
+
+					<span class="title">面板</span>
+
+					
+
+					</a>
+
+				</li>
+
+
+				<li class="">
+
+					<a href="javascript:;">
+
+					<i class="icon-briefcase"></i> 
+
+					<span class="title">页面</span>
+
+					<span class="arrow "></span>
+
+					</a>
+
+					<ul class="sub-menu">
+
+
+
+						<li >
+
+							<a href="http://inankai.cn/pjweb/index.php/Index/index">
+
+							<i class="icon-comments"></i>
+
+							网站首页</a>
+
+						</li>
+
+
+						<li id="page_contact">
+
+							<a href="page_contact.php">
+
+							<i class="icon-envelope-alt"></i>
+
+							联系我们</a>
+
+						</li>
+
+						
+
+					</ul>
+
+				</li>
+
+
+
+				<li class="">
+
+					<a href="javascript:;">
+
+					<i class="icon-th"></i> 
+
+					<span class="title">数据表</span>
+
+					<span class="arrow "></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<if condition="$admin_right eq 0">
+						<li id="table_editable">
+							<!-- 仅超级管理员可见 -->
+							<a href="table_editable.php">
+
+							超级管理员</a>
+
+						</li>
+						<li id="table_managed">
+
+							<a href="table_managed.php">
+
+							管理员表</a>
+
+						</li>
+						</if>
+
+						<li id="table_users">
+
+							<a href="table_users.php">
+
+							用户表</a>
+
+						</li>
+
+
+						<li id="table_comment">
+
+							<a href="{:U('Manage/table_comment')}">
+
+							评论及回复</a>
+
+						</li>
+
+					</ul>
+
+				</li>
+
+
+				<li id="charts" class="last ">
+
+					<a href="charts.php">
+
+					<i class="icon-bar-chart"></i> 
+
+					<span class="title">统计图</span>
+
+					</a>
+
+				</li>
+
+			</ul>
+
+			<!-- END SIDEBAR MENU -->
+
+		</div>
+
+		<!-- END SIDEBAR -->

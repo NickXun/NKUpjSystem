@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>你最喜欢的老师</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link src="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="__PUBLIC__/js/jquery-1.5.1.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/jquery.raty.js" type="text/javascript"></script>
+<style>
+.shadow{
+	box-shadow:0 0 3px rgb(189,189,189);
+}
+header{
+	padding:4%;
+	text-align:center;
+	font-size:1.2em;
+	font-weight:300;
+	background-color:#43ce80;
+	letter-spacing:1px;
+	color:rgba(255,255,255,1.00);
+}
+#arrow{
+  background: url(__PUBLIC__/images/icon_back.png) 0 0 no-repeat;
+  background-size: contain;
+  height: 80%;
+  width: 6%;
+  margin-left: 10px;
+  float: left;
+  display: inline-block;
+}
+body{
+	background-color:rgb(238,238,238);
+	margin:0px;
+	font: "等线" normal 100%;
+	color:#4F4F4F;
+	letter-spacing:1px;
+	text-align:center;	
+}
+.btn{
+	background-color:#43ce80;
+	border-radius:20px;
+	color:#FFF;
+	padding:2%;
+	padding-left:5%;
+	padding-right:5%;
+	margin:5%;
+	border:none;
+	font:"等线";
+	font-size:0.9em;
+}
+.class-name{
+	font-size:0.5em;
+}
+.teacher{
+	font-size:1.1em;
+	/*letter-spacing:1.2em;*/
+	font-weight:300;
+	margin: 0 auto;
+  display: inline-block;
+  height: 30px;
+}
+ul,li{  
+	list-style:none;  
+}  
+ul{  
+	overflow:hidden;  
+	padding:2%;  
+	margin:0px;
+}  
+ul li{  
+	text-decoration:none;  
+	display:block;  
+	height:20%;  
+	width:42%;  
+	background-color:rgb(248,248,248);
+	padding:2%;  
+	margin:2%;  
+	float:left;
+	border
+}  
+
+</style>
+</head>
+
+<body>
+  <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>你最喜欢的老师</header>
+  <div>
+  <ul>
+  <volist name="teacher" id="vo">
+  <li class="shadow valuediv" id="{$vo->t_id}">
+	  <img onclick="deleteDiv(this);" src="__PUBLIC__/images/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">{$vo->t_name}</span><br>
+	  <!-- <span class="class-name">大学语文</span><br> -->
+	  <span id="star{$autoi}"></span>
+      <span id="result{$autoi++}"></span>
+  </li>
+  </volist>
+  <!-- <li class="shadow">
+	  <img onclick="deleteDiv(this);" src="img/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">林晨</span><br>
+	  <span class="class-name">大学语文</span><br>
+	  <span id="star2"></span>
+      <span id="result2"></span>
+  </li>
+  <li class="shadow">
+	  <img onclick="deleteDiv(this);" src="img/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">林晨</span><br>
+	  <span class="class-name">大学语文</span><br>
+	  <span id="star3"></span>
+      <span id="result3"></span>
+  </li>
+  <li class="shadow">
+	  <img onclick="deleteDiv(this);" src="img/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">林晨</span><br>
+	  <span class="class-name">大学语文</span><br>
+	  <span id="star4"></span>
+      <span id="result4"></span>
+  </li>
+  <li class="shadow">
+	  <img onclick="deleteDiv(this);" src="img/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">林晨</span><br>
+	  <span class="class-name">大学语文</span><br>
+	  <span id="star5"></span>
+      <span id="result5"></span>
+  </li>
+  <li class="shadow">
+	  <img onclick="deleteDiv(this);" src="img/icon_delete.png" width="5%" style="float:right">
+	  <span style="font-size:1.1em">&nbsp;</span>
+	  <span class="teacher">林晨</span><br>
+	  <span class="class-name">大学语文大学语文大学语文</span><br>
+	  <span id="star6"></span>
+      <span id="result6"></span>
+  </li> -->
+  
+  </ul>
+  <div>
+    <!-- 提交后回主页mian.html -->
+    <button class="btn" style="outline:none;" id="submit">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+    <!-- 再评进入下一页 -->
+    <button class="btn" style="outline:none;" id="changeteacher">再评一会儿</button>
+  </div>
+  </div>
+</body>
+<script type="text/javascript">
+//动态调整字体大小，因为老师名字长短不一
+// $(function(){
+//   var fsize=$(".teacher").css("font-size");
+//   var spanArr=$(".teacher");
+//   for (var i = spanArr.length - 1; i >= 0; i--) {
+//     var len=spanArr[i].innerHTML.length;             //获取str长短
+//     len=(len<8)?len:7;
+//     var spanWidth=spanArr[i].parentNode.clientWidth-screen.availWidth*0.2;
+//     spanArr[i].style.fontSize=spanWidth/len+'px';
+//     if(len>=5){
+//       spanArr[i].style.fontWeight="bold";
+//     }
+//     spanArr[i].style.display="block";
+//     if(debug){
+//       console.log(spanArr[i].parentNode.clientWidth);
+//       console.log(spanArr[i].innerHTML);
+//       console.log(spanArr[i].style.fontSize);
+//       console.log(len);
+//     }
+    
+//   };
+// })
+
+function rat(star,result,m){
+  star= '#' + star;
+  result= '#' + result;
+  $(result).hide();//将结果DIV隐藏
+
+  $(star).raty({
+    hints: ['10','20', '30', '40', '50','60', '70', '80', '90', '100'],
+    path: "__PUBLIC__/css/img",
+    starOff: 'star-off-big.png',
+    starOn: 'star-on-big.png',
+    size: 12,
+    start: 40,
+    showHalf: true,
+    target: result,
+    targetKeep : true,//targetKeep 属性设置为true，用户的选择值才会被保持在目标DIV中，否则只是鼠标悬停时有值，而鼠标离开后这个值就会消失
+    click: function (score, evt) {
+      //第一种方式：直接取值,在这里获取分值
+      //alert('你的评分是'+score*m+'分');
+    }
+  });
+
+  /*第二种方式可以设置一个隐蔽的HTML元素来保存用户的选择值，然后可以在脚本里面通过jQuery选中这个元素来处理该值。 弹出结果
+  var text = $(result).text();
+  $('img').click(function () {
+    if ($(result).text() != text) {
+      alert('你的评分是'+$(result).text()/m+'分');
+      alert(result);
+      return;
+    }
+  });*/
+}
+var NUM=6;
+window.onload=function(){
+  for(var j=1;j<=NUM;j++){
+    //调用星星函数，1代表星星的分值
+    rat('star'+j,'result'+j,1);
+    var parentObj=document.getElementById("star"+j);
+    //跳过空白和最后隐藏的input
+    for (var i = parentObj.childNodes.length - 2; i >= 0; i-=2) {
+      //设置星星的大小
+      parentObj.childNodes[i].width=screen.width*0.035;    
+    };
+  }
+}
+function deleteDiv(o){
+	o.parentNode.style.display="none";
+}
+
+var evlue = [];
+
+$("#submit").click(function(){
+  $(".valuediv").each(function(index, el) {
+    //console.log($(this));
+    var packet = {};
+    var $self = $(this);
+    var id = $self[0].id;
+    //console.log($self);
+    //console.log(id);
+    var score = $self[0].childNodes[12].innerHTML;
+    //console.log()
+    if (score) {
+      packet.id = id;
+      packet.score = score;
+      packet.type = "2";
+      packet.comment_type = 0;
+      evlue.push(packet);
+    }
+  });
+  if (!evlue.length) {
+    alert("请至少评价一位老师再点提交哦，没有想评价的老师可以点再评一会换一组老师");
+    return;
+  }
+  console.log(JSON.stringify(evlue));
+  $.post(
+      "{:U('Main/evlueteacher')}"
+    , 
+    {
+      evlue : JSON.stringify(evlue)
+    }
+    , 
+      function (data){
+        if (data.status == "fail") {
+          alert("评价失败请稍候再试");
+        } else {
+          var r = confirm("评论成功！点击确定留下宝贵意见并参与抽奖，点击取消返回主菜单");
+          if (r == true)
+          {
+            window.location.href = "{:U('Main/adivse')}";
+          }
+          else
+          {
+            window.location.href = "{:U('Main/main')}";
+          }
+        }
+      }
+    )
+  evlue = [];
+})
+
+$("#changeteacher").click(function() {
+  $(".valuediv").each(function(index, el) {
+    //console.log($(this));
+    var packet = {};
+    var $self = $(this);
+    var id = $self[0].id;
+    var score = $self[0].childNodes[12].innerHTML;
+    //var comment_type = $self[0].childNodes[3].childNodes[13].value;
+    //console.log()
+    if (score) {
+      packet.id = id;
+      packet.score = score;
+      packet.type = "2";
+      packet.comment_type = 0;
+      evlue.push(packet);
+    }
+  });
+  if (!evlue.length) {
+    window.location.href = "{:U('Main/teacher')}";
+    return;
+  }
+  $.post(
+    "{:U('Main/evlueteacher')}",
+    {
+      evlue : JSON.stringify(evlue)
+    }, 
+    function (data){
+        if (data.status == "fail") {
+          alert("评价失败请稍候再试");
+        } else {
+          window.location.href = "{:U('Main/teacher')}";
+          alert("评价成功！已切换至另一组");
+        }
+      }
+    )
+
+})
+
+</script>
+</html>

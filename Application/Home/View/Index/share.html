@@ -1,0 +1,286 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="__PUBLIC__/js/jquery-1.5.1.js" type="text/javascript"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>分享</title>
+</head>
+<style>
+body{
+	margin:0px; 
+	padding:0px; 
+	border:0px; 
+	font:"等线" normal 100%;
+}
+.btn{
+	border:#FFF thin solid;
+	width:30%;
+	padding:2%;
+	font-size:1.4em;
+	background:none;
+	color:#FFF;
+	margin:5%;
+	margin-bottom:15%;
+	border-radius:25px;
+	font-weight:300;
+}
+.honor{
+	font-size:1.2em;
+	color:#FFFFFF;
+	letter-spacing:2px;
+}
+th{
+	color:#3C3C3C;
+	letter-spacing:2px;
+	font-size:1.2em;
+	font-weight:300;
+	margin-left:2%;
+}
+td{
+	color:rgba(36,36,36,1.00);
+	font-size:1em;
+}
+.side{
+	text-align:right;
+	padding-right:5%; 
+	font-size:0.8em;
+}
+  .animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+  @-webkit-keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+.add{
+  background: #ddd;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  display: block;
+  line-height: 50px;
+  
+}
+#share{
+  background: rgba(65,67,80,.8) url(__PUBLIC__/images/text-share.png) top right no-repeat;
+  -webkit-background-size: contain;
+  background-size: contain;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+#parent{
+  position: relative;
+}
+
+</style>
+<!-- 这个页面不用登陆也能访问 -->
+<body >
+<div style="width:100%; margin:0px;  background-image:url(__PUBLIC__/images/share_bg.png); background-repeat:no-repeat; background-size:100%; text-align:center">
+  <div class="honor" style="padding-top:20%"><span style="color:#FF0; font-size:1.5em; letter-spacing:3px">{$name}</span>评了{$num}门课，</div>
+  <div class="honor" style="margin-top:3%; margin-bottom:3%">打败了<span style="color:#FF0">{$percent}%</span>的南开学子,</div>
+  <div class="honor">被授予<span style="color:#FF0">南开优秀校友</span>的头衔！</div>
+  <div style="margin-top:15%">
+    <a href="javascript:coverShow(this);"><button class="btn" style="outline:none;">分&nbsp;&nbsp;&nbsp;享</button></a>
+    <a href="{:U('Main/main')}"><button class="btn" style="outline:none;">我要评课</button> </a>
+  </div>
+</div>
+
+  <!--<div style="background-color:#CCC; padding:5%"><span>最热评论</span><img src="icon_chevron_left.png"><img src="icon_chevron_right.png"></div>-->
+  <table class="table" style="border-color:rgb(248,248,248); border-width:thin">
+    <thread>
+      <tr style="background-color:rgb(248,248,248)">
+      <th>最热评论</th>
+      <th style="text-align:right; padding-right:10%">
+        <!-- <img src="img/icon_chevron_left.png" width="8%">&nbsp;&nbsp;&nbsp;&nbsp;
+        <img onclick="slideRight();" src="img/icon_chevron_right.png" width="8%"> -->
+      </th>
+      </tr>
+    </thread>
+      <tbody class="comment" id="comment1">
+        <volist name="comment" id="vo">
+        <tr>
+        <td>{$vo.comment_info}</td>
+        <td class="side"><img onclick="like(this);" id="{$vo.comment_id}" src="__PUBLIC__/images/icon_loveit_none.png" width="18%">&nbsp;&nbsp;<span>{$vo.comment_zan}</span>个赞</td>
+        </tr>
+        </volist>
+      </tbody>
+    </table>
+    <!-- 点赞动画 -->
+    <div id="container"></div>
+    <!-- 遮罩 -->
+    <div id="share" onclick="coverHide(this)"></div>
+
+<script type="text/javascript">
+//点赞
+  var zan = localStorage.zan ? localStorage.zan : "";
+  //console.log(zan);
+  if (zan) {
+    var zanarray = zan.split(",");
+    for(var i = 0; i < zanarray.length; i++) {
+      console.log($("#"+zanarray[i]));
+      $("#"+zanarray[i])[0].src = "__PUBLIC__/images/icon_loveit_click.png";
+      //console.log($("#"+zanarray[i]));
+    }
+  } else {
+    zanarray = [];
+  }
+  function like(o){
+    var divShow=document.createElement("div");   //点赞时的动画
+    var container=document.getElementById("container");
+    var comment_id = "";
+    divShow.style.position="absolute";
+      divShow.style.top=document.body.clientHeight/2-25+'px'; 
+      divShow.style.left=document.body.clientWidth/2-25+'px'; 
+    divShow.className="fadeOutDown animated add text-center";
+    var count=+o.nextSibling.nextSibling.innerHTML;
+    //通过图片名称来判断点赞状态
+    if(o.src.slice(-8,-4)=="none"){
+      o.src="__PUBLIC__/images/icon_loveit_click.png";
+      o.nextSibling.nextSibling.innerHTML=count+1;
+      //console.log($(o).parent().parent()[0].id);
+      comment_id = $(o)[0].id;
+       $.post(
+         "{:U('Main/addzan')}", 
+        {
+          comment_id : comment_id
+        }, 
+        function (data){
+            divShow.innerHTML="+1";
+        });
+        zanarray.push(comment_id);
+    }else{
+      o.src="__PUBLIC__/images/icon_loveit_none.png";
+      o.nextSibling.nextSibling.innerHTML=count-1;
+      comment_id = $(o)[0].id;
+      $.post(
+         "{:U('Main/subzan')}", 
+        {
+          comment_id : comment_id
+        }, 
+        function (data){
+            divShow.innerHTML="-1";
+        });
+        zanarray.splice(zanarray.indexOf(comment_id),1);
+    }
+    //console.log(o.nextSibling.nextSibling.innerHTML);
+    container.appendChild(divShow);
+    //console.log(zanarray);
+    localStorage.zan = zanarray.join(",");
+  }
+  function coverShow(){
+    document.getElementById("share").style.display="block";
+    
+  }
+  function coverHide(o){
+    o.style.display="none";
+  }
+
+ wx.config({
+    debug: false,
+    appId: '{$signPackage.appId}',
+    timestamp: {$signPackage.timestamp},
+    nonceStr: '{$signPackage.nonceStr}',
+    signature: '{$signPackage.signature}',
+    jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'hideMenuItems',
+      'showMenuItems',
+      'hideAllNonBaseMenuItem',
+      'showAllNonBaseMenuItem',
+      'translateVoice',
+      'startRecord',
+      'stopRecord',
+      'onRecordEnd',
+      'playVoice',
+      'pauseVoice',
+      'stopVoice',
+      'uploadVoice',
+      'downloadVoice',
+      'chooseImage',
+      'previewImage',
+      'uploadImage',
+      'downloadImage',
+      'getNetworkType',
+      'openLocation',
+      'getLocation',
+      'hideOptionMenu',
+      'showOptionMenu',
+      'closeWindow',
+      'scanQRCode',
+      'chooseWXPay',
+      'openProductSpecificView',
+      'addCard',
+      'chooseCard',
+      'openCard'
+      ]
+    });
+var shareData = {
+      title: '我的南开ID {$student_code}，我是第{$pos}个为学弟学妹指点迷津的校友', // 分享标题
+      desc: '{$name}评了{$num}门课，打败了{$percent}校友，被授予南开XXX头衔', // 分享描述
+      link: window.location.href, // 分享链接
+      imgUrl: 'http://inankai.nankai.edu.cn__PUBLIC__/images/share_bg.png', // 分享图标
+      type: '', // 分享类型,music、video或link，不填默认为link
+      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      success: function () { 
+          // 用户确认分享后执行的回调函数
+      },
+      cancel: function () { 
+          // 用户取消分享后执行的回调函数
+      }
+};
+wx.ready(function () {
+    // 在这里调用 API
+    wx.onMenuShareTimeline(shareData);
+    wx.onMenuShareAppMessage(shareData);
+    wx.onMenuShareQQ(shareData);
+    wx.onMenuShareWeibo(shareData);
+    wx.onMenuShareQZone(shareData);
+  });
+
+</script>
+</body>
+</html>

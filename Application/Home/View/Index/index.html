@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="height=width=device-width,width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/loading1.css">
+<style>
+
+.inputblock{
+	background-color:transparent;
+	border:0px;
+	color: #FFFFFF;
+	font-size:1em;
+	width:60%;
+	height:36px;
+	font-family:"等线";
+	font-weight:200;
+}
+.inputcolumn{
+	border-bottom:#FFFFFF solid thin;
+	font-color: #FFFFFF;
+	margin:8% auto;
+	padding:0px;
+	font-weight:200;
+	font-size:24px;
+}
+.titles{
+	letter-spacing: 5px;
+	font-size: 0.9em;
+	color: #FFFFFF;
+	padding-right: 5px;
+	padding-left: 1px;
+	font-family: "等线";
+}
+::-webkit-input-placeholder{
+	color:#FFFFFF;
+	font-size:0.65em;
+	font-weight:lighter;
+	padding:0px;
+	font-family:"等线";
+	opacity:0.5;
+}
+#submit{
+	font-size:1.5em;
+	color:#FFFFFF;
+	background-color:#43ce80;
+	border:thin #FFFFFF solid;
+	width:80%;
+	padding-top:2%;
+	padding-bottom:2%;
+	border-radius:20px;
+	font-family:"等线";
+	margin-top:10%;
+	cursor: pointer;
+}
+#forgot{
+	position: absolute; 
+	height: 20px;
+	margin-top: 5px;
+
+}
+/*.copyRightWrap{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}*/
+.copyRight{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	text-align: center;
+	font-size: 12px;
+	display: block;
+	color: #fff;
+	width: 100%;
+}
+</style>
+<title>校友登录</title>
+</head>
+  
+<body style="background-color:#43ce80; text-align:center; margin:10%; font-family:'等线'; font:normal 100%">
+  <div style=" margin:10%; margin-top:20%"><img src="__PUBLIC__/images/nku_logo.png" width="60%" >
+  </div>
+  <div class="inputcolumn">
+    <span class="titles">学号</span>
+	<input required class="inputblock" name="number" type="text" placeholder="输入你在南开大学的学号" value="{$studentcode}"><img id="forgot" onclick="toFindid()" src="__PUBLIC__/images/icon_forgot.png">
+	</div>
+  <div class="inputcolumn">
+    <!--<a style="float:right" href=""><img src="icon_forgot.png" width="50%"></a>问号-->
+    <span class="titles">姓名</span>
+    <input required class="inputblock" type="text" name="name" value="{$name}" placeholder="输入你的姓名">
+</div>
+  <div id="login_submit"><button id="submit"  style="outline:none;">评&nbsp;&nbsp;&nbsp;课</button></div>
+  <!-- <div class="copyRightWrap"> -->
+  	<p id="copyR" class="copyRight">© 2016 南开大学教务处 | 校友评课系统</p>
+  <!-- </div> -->
+  
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/loading1.js"></script>
+<script type="text/javascript">
+var copyR=document.getElementById("copyR");
+var offsetTop=document.getElementById("copyR").offsetTop;
+window.onresize=function(){
+	var Top=document.documentElement.clientHeight;
+	copyR.style.display="block";
+	if(Top<offsetTop){
+		copyR.style.display="none";
+	}
+}
+</script>
+<script type="text/javascript">
+	$("#submit").click(function(event) {
+		var number = $("input[name='number']").val();
+		var name = $("input[name='name']").val();
+		loadingAnim.show();
+		$.post(
+			"{:U('Index/logincheck')}", 
+			{
+				number : number,
+				name : name
+			}, 
+			function (data){
+				if (data.status) {
+					if (data.status == 1)
+						window.location.href = "{:U('Main/main')}";
+					else if (data.status == 2)
+						window.location.href = "{:U('Ungrade/untarget_user')}"
+				} else {
+					alert(data.content);
+					loadingAnim.hide();
+				}
+			}
+		)
+	});
+
+
+	function toFindid(){
+		window.location.href = "{:U('Index/findid')}";
+	}
+</script>
