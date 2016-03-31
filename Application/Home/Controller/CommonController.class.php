@@ -31,6 +31,7 @@ class CommonController extends Controller {
             $finalresult[$item['department_code']]['enum'] = $item['num'];
             $finalresult[$item['department_code']]['percent'] = round(($finalresult[$item['department_code']]['enum'] / $finalresult[$item['department_code']]['num']) * 100,2)."%";
         }
+        unset($finalresult['9999']);
 
         $this->assign("process", $finalresult);
 
