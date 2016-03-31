@@ -117,7 +117,7 @@ td{
 <div style="width:100%; margin:0px;  background-image:url(__PUBLIC__/images/share_bg.png); background-repeat:no-repeat; background-size:100%; text-align:center">
   <div class="honor" style="padding-top:20%"><span style="color:#FF0; font-size:1.5em; letter-spacing:3px">{$name}</span>评了{$num}门课，</div>
   <div class="honor" style="margin-top:3%; margin-bottom:3%">打败了<span style="color:#FF0">{$percent}%</span>的南开学子,</div>
-  <div class="honor">被授予<span style="color:#FF0">南开优秀校友</span>的头衔！</div>
+  <div class="honor">被授予<span style="color:#FF0">{$tx}</span>的头衔！</div>
   <div style="margin-top:15%">
     <a href="javascript:coverShow(this);"><button class="btn" style="outline:none;">分&nbsp;&nbsp;&nbsp;享</button></a>
     <a href="{:U('Main/main')}"><button class="btn" style="outline:none;">我要评课</button> </a>
@@ -260,7 +260,7 @@ td{
     });
 var shareData = {
       title: '我的南开ID {$student_code}，我是第{$pos}个为学弟学妹指点迷津的校友', // 分享标题
-      desc: '{$name}评了{$num}门课，打败了{$percent}%校友，被授予南开XXX头衔', // 分享描述
+      desc: '{$name}评了{$num}门课，打败了{$percent}%校友，被授予{$tx}', // 分享描述
       link: window.location.href, // 分享链接
       imgUrl: 'http://inankai.nankai.edu.cn__PUBLIC__/images/share_bg.png', // 分享图标
       type: '', // 分享类型,music、video或link，不填默认为link

@@ -82,13 +82,16 @@ class IndexController extends WeixinController {
         //选出第几个评论的
         $pos = M('Evalue')->where('evalue_date<(select min(evalue_date) from jwc_evalue where student_code="'.$student_code.'")')->field('count(distinct(student_code)) as pos')->select();
 
-        $percent = $this->culpercent($num);
+        $temp = $this->culpercent($num);
+        $percent = $temp['percent'];
+        $tx = $temp['tx'];
 
         $this->assign('pos', $pos[0]['pos']);
         $this->assign('student_code',$student_code);
         $this->assign('name',$name);
         $this->assign('num',$num);
         $this->assign('percent',$percent);
+        $this->assign('tx',$tx);
 
         $comment = D('Comment');
 
@@ -104,16 +107,25 @@ class IndexController extends WeixinController {
 
     function culpercent($num) {
         $percent = 60;
+        $tx = "";
         $num = intval($num);
-        if ($num == 0)
-            return 0;
+        if ($num == 0) {
+            $percent = 0;
+        }
         else if ($num > 0 && $num <= 10) {
             $percent += $num + 2 + rand(0,100) / 100;
+            $tx = "南开好校友";
         } else if ($num > 10 && $num <= 20) {
             $percent += $num + 5 + rand(0,100) / 100;
+            $tx = "南开优秀校友";
         } else if ($num > 20) {
             $percent += 25 + $num / 25;
+            $tx = "南开金牌校友";
         }
-        return $percent;
+
+        $temp['percent'] = $percent;
+        $temp['tx'] = $tx;
+
+        return $temp;
     }
 }
