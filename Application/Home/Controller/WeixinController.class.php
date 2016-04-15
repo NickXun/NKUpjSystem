@@ -4,7 +4,7 @@ use Think\Controller;
 class WeixinController extends Controller {
     public function _initialize()
     {
-        $jssdk = new JSSDK("wxdec110b41d95efbe", "34a22cda1feecc9261bfd9b44443de40");
+        $jssdk = new JSSDK("wx0aed2861054c5ac3", "0192c9c8b10c19c9206ca97779c25b9a");
         $signPackage = $jssdk->GetSignPackage();
         $this->assign('signPackage',$signPackage);
     }
