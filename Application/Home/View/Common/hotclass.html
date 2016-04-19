@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<script src="__PUBLIC__/js/jquery.raty.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/jquery-1.5.1.js" type="text/javascript"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <style>
 header{
@@ -80,8 +80,8 @@ body{
 </style>
 <title>最热课程</title>
 </head>
-
 <body>
+	
   <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>最热课程</header>
   <div class="btn-group" style="margin:10%">
 	  <button id="btn1" onclick="clickBtn1();" type="button" class="btn btn-default btn-1" style="outline:none;">全&nbsp;&nbsp;&nbsp;校</button>
@@ -103,10 +103,77 @@ body{
 <script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
 <script type="text/javascript">
 //分享的标题、链接、图片链接
-var title="南开大学各院十大热门课程";
-var desc="全世界校友评选，2016年南开大学各院十大热门课程新鲜出炉";
-var link=window.location.href;
-var imgUrl="http://a3.att.hudong.com/83/41/01200000131071136554417140334.jpg";
+// var title="南开大学各院十大热门课程";
+// var desc="全世界校友评选，2016年南开大学各院十大热门课程新鲜出炉";
+// var link=window.location.href;
+// var imgUrl="http://a3.att.hudong.com/83/41/01200000131071136554417140334.jpg";
+wx.config({
+    debug: false,
+    appId: '{$signPackage.appId}',
+    timestamp: {$signPackage.timestamp},
+    nonceStr: '{$signPackage.nonceStr}',
+    signature: '{$signPackage.signature}',
+    jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'hideMenuItems',
+      'showMenuItems',
+      'hideAllNonBaseMenuItem',
+      'showAllNonBaseMenuItem',
+      'translateVoice',
+      'startRecord',
+      'stopRecord',
+      'onRecordEnd',
+      'playVoice',
+      'pauseVoice',
+      'stopVoice',
+      'uploadVoice',
+      'downloadVoice',
+      'chooseImage',
+      'previewImage',
+      'uploadImage',
+      'downloadImage',
+      'getNetworkType',
+      'openLocation',
+      'getLocation',
+      'hideOptionMenu',
+      'showOptionMenu',
+      'closeWindow',
+      'scanQRCode',
+      'chooseWXPay',
+      'openProductSpecificView',
+      'addCard',
+      'chooseCard',
+      'openCard'
+      ]
+    });
+var shareData = {
+      title: '南开大学各院十大热门课程', // 分享标题
+      desc: '全世界校友评选，2016年南开大学各院十大热门课程新鲜出炉', // 分享描述
+      link: window.location.href, // 分享链接
+      imgUrl: 'http://ww2.sinaimg.cn/cmw218/6e5fd4c1jw1ey7bhaokhgj20hs0l8mzj.jpg', // 分享图标
+      type: '', // 分享类型,music、video或link，不填默认为link
+      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      success: function () { 
+          // 用户确认分享后执行的回调函数
+      },
+      cancel: function () { 
+          // 用户取消分享后执行的回调函数
+      }
+};
+wx.ready(function () {
+    // 在这里调用 API
+    wx.onMenuShareTimeline(shareData);
+    wx.onMenuShareAppMessage(shareData);
+    wx.onMenuShareQQ(shareData);
+    wx.onMenuShareWeibo(shareData);
+    wx.onMenuShareQZone(shareData);
+  });
+
 </script>
 <?php //include_once "wxshare.php" ?>
 

@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class MainController extends Controller {
+class MainController extends WeixinController {
 
 	public function __construct()  
     {  

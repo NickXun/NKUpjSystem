@@ -84,6 +84,8 @@ select{
 }
 </style>
 <body>
+<!-- 隐藏一张图片，微信分享时会抓取网页里的第一个图片 -->
+  <img hidden src="http://ww2.sinaimg.cn/cmw218/6e5fd4c1jw1ey7bhaokhgj20hs0l8mzj.jpg" alt="">
   <header><span onclick="history.go(-1);" id="arrow">&nbsp;&nbsp;</span>你最喜欢的课</header>
    <!-- <div class="media">
     <span class="pull-left media-object" ><span class="class-name">大学语文</span><br><span>授课教师：林晨</span></span>
@@ -251,7 +253,7 @@ function rat(star,result,m){
 
 
 var NUM=5;
-var widthFactor=isIphone()?0.035:0.025;
+var widthFactor=isIphone()?0.035:0.03;
 window.onload=function(){
   for(var j=1;j<=NUM;j++){
     //调用星星函数，1代表星星的分值
@@ -448,7 +450,7 @@ wx.config({
     });
 var shareData = {
       title: '南开时“课”（测试版）', // 分享标题
-      desc: '还记得那些年一起上过的课吗？', // 分享描述
+      desc: '南开时“课”（测试版）', // 分享描述
       link: window.location.href, // 分享链接
       imgUrl: 'http://ww2.sinaimg.cn/cmw218/6e5fd4c1jw1ey7bhaokhgj20hs0l8mzj.jpg', // 分享图标
       type: '', // 分享类型,music、video或link，不填默认为link
