@@ -138,8 +138,8 @@ td{
       <tbody class="comment" id="comment1">
         <volist name="comment" id="vo">
         <tr>
-        <td>{$vo.comment_info}</td>
-        <td class="side"><img onclick="like(this);" id="{$vo.comment_id}" src="__PUBLIC__/images/icon_loveit_none.png" width="18%">&nbsp;&nbsp;<span>{$vo.comment_zan}</span>个赞</td>
+        <td style="width: 75%;">{$vo.comment_info}</td>
+        <td style="width: 23%;"class="side"><img onclick="like(this);" id="{$vo.comment_id}" src="__PUBLIC__/images/icon_loveit_none.png" width="30%">&nbsp;&nbsp;<span>{$vo.comment_zan}</span>个赞</td>
         </tr>
         </volist>
       </tbody>
